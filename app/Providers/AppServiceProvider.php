@@ -22,5 +22,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Berita::observe(BeritaObserver::class);
+        \Illuminate\Pagination\Paginator::useBootstrapFive();
     }
 }

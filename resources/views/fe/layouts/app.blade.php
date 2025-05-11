@@ -24,6 +24,8 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('news') }}/css/style.css" rel="stylesheet">
+
+    @stack('style')
 </head>
 
 <body>
