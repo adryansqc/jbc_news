@@ -82,12 +82,6 @@ class BeritaResource extends Resource
                     ->directory('content')
                     ->columnSpanFull(),
 
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255)
-                    ->unique(ignoreRecord: true)
-                    ->label('Slug')
-                    ->hiddenOn('create'),
             ]);
     }
 
@@ -95,7 +89,40 @@ class BeritaResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Gambar')
+                    ->disk('public')
+                    ->circular(),
+
+                Tables\Columns\TextColumn::make('judul')
+                    ->label('Judul Berita')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(50),
+
+                Tables\Columns\TextColumn::make('kategori.name')
+                    ->label('Kategori')
+                    ->searchable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Penulis')
+                    ->searchable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('tanggal')
+                    ->label('Tanggal')
+                    ->date('d M Y')
+                    ->sortable(),
+
+                Tables\Columns\IconColumn::make('status')
+                    ->label('Status')
+                    ->boolean()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('view')
+                    ->label('Dilihat')
+                    ->sortable(),
             ])
             ->filters([
                 //

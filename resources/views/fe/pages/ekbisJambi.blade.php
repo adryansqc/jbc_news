@@ -26,7 +26,7 @@
                                             href="">{{ $berita->kategori->name }}</a>
                                         <a class="text-body" href=""><small>{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</small></a>
                                     </div>
-                                    <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold" 
+                                    <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"
                                        href="{{ route('frontend.beritaDetail', $berita->slug) }}">
                                         {{ Str::limit($berita->judul, 50) }}
                                     </a>
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
                                     <div class="d-flex align-items-center">
-                                        <img class="rounded-circle mr-2" src="{{ asset('storage/' . $berita->user->image) }}" width="25" height="25" alt="">
+                                        {{-- <img class="rounded-circle mr-2" src="{{ asset('storage/' . $berita->user->image) }}" width="25" height="25" alt=""> --}}
                                         <small>{{ $berita->user->name }}</small>
                                     </div>
                                     <div class="d-flex align-items-center">
@@ -62,12 +62,7 @@
 
                     <!-- Ads Start -->
                     <div class="mb-3">
-                        <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">Advertisement</h4>
-                        </div>
-                        <div class="bg-white text-center border border-top-0 p-3">
-                            <a href=""><img class="img-fluid" src="{{ asset('news') }}/img/news-800x500-2.jpg" alt=""></a>
-                        </div>
+                        @include('fe.components.advertisement')
                     </div>
                     <!-- Ads End -->
 
@@ -79,7 +74,7 @@
                         <div class="bg-white border border-top-0 p-3">
                             @forelse($beritaPopuler as $berita)
                             <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover;" alt="">
+                                <img class="img-fluid" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover; width: 110px; height: 110px;" alt="">
                                 <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
                                         <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
@@ -113,7 +108,7 @@
 
                             <div class="d-flex flex-wrap m-n1">
                                 @foreach ($kategori as $item)
-                                <a href="{{ route('frontend.' . strtolower(str_replace(' ', '', $item->name))) }}" 
+                                <a href="{{ route('frontend.' . strtolower(str_replace(' ', '', $item->name))) }}"
                                    class="btn btn-sm btn-outline-secondary m-1">{{ $item->name }}</a>
                                 @endforeach
                             </div>

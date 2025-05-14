@@ -37,7 +37,7 @@
                             style="width: calc(100% - 180px); padding-right: 100px;">
                             @foreach($beritaTerkait as $terkait)
                             <div class="text-truncate">
-                                <a class="text-secondary text-uppercase font-weight-semi-bold" 
+                                <a class="text-secondary text-uppercase font-weight-semi-bold"
                                    href="{{ route('frontend.beritaDetail', $terkait->slug) }}">
                                     {{ $terkait->judul }}
                                 </a>
@@ -61,6 +61,7 @@
                         <img class="img-fluid w-100" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover; height: 500px;" alt="{{ $berita->ket_image }}">
                         <div class="bg-white border border-top-0 p-4">
                             <div class="mb-3">
+                                <p>{{ $berita->ket_image }}</p>
                                 <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
                                     href="{{ route('frontend.' . strtolower(str_replace(' ', '', $berita->kategori->name))) }}">
                                     {{ $berita->kategori->name }}
@@ -91,12 +92,7 @@
 
                     <!-- Ads Start -->
                     <div class="mb-3">
-                        <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">Advertisement</h4>
-                        </div>
-                        <div class="bg-white text-center border border-top-0 p-3">
-                            <a href=""><img class="img-fluid" src="img/news-800x500-2.jpg" alt=""></a>
-                        </div>
+                        @include('fe.components.advertisement')
                     </div>
                     <!-- Ads End -->
 
@@ -108,14 +104,14 @@
                         <div class="bg-white border border-top-0 p-3">
                             @forelse($beritaPopuler as $popular)
                             <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="{{ asset('storage/' . $popular->image) }}" style="object-fit: cover;" alt="">
+                                <img class="img-fluid" src="{{ asset('storage/' . $popular->image) }}" style="object-fit: cover; width: 110px; height: 110px;" alt="">
                                 <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
                                         <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
                                             href="">{{ $popular->kategori->name }}</a>
                                         <a class="text-body" href=""><small>{{ \Carbon\Carbon::parse($popular->tanggal)->format('d M Y') }}</small></a>
                                     </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" 
+                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
                                        href="{{ route('frontend.beritaDetail', $popular->slug) }}">
                                         {{ Str::limit($popular->judul, 50) }}
                                     </a>
@@ -145,7 +141,7 @@
 
                             <div class="d-flex flex-wrap m-n1">
                                 @foreach ($kategori as $item)
-                                <a href="{{ route('frontend.' . strtolower(str_replace(' ', '', $item->name))) }}" 
+                                <a href="{{ route('frontend.' . strtolower(str_replace(' ', '', $item->name))) }}"
                                    class="btn btn-sm btn-outline-secondary m-1">{{ $item->name }}</a>
                                 @endforeach
                             </div>

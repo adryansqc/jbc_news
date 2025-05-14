@@ -19,7 +19,7 @@
                                     href="">{{ $berita->kategori->name }}</a>
                                 <a class="text-white" href="">{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</a>
                             </div>
-                            <a class="h2 m-0 text-white text-uppercase font-weight-bold" 
+                            <a class="h2 m-0 text-white text-uppercase font-weight-bold"
                                href="{{ route('frontend.beritaDetail', $berita->slug) }}">{{ $berita->judul }}</a>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                                         href="">{{ $berita->kategori->name }}</a>
                                     <a class="text-white" href=""><small>{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</small></a>
                                 </div>
-                                <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold" 
+                                <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold"
                                href="{{ route('frontend.beritaDetail', $berita->slug) }}">{{ Str::limit($berita->judul, 50) }}</a>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                             style="width: calc(100% - 170px); padding-right: 90px;">
                             @forelse($sliderBerita as $berita)
                             <div class="text-truncate">
-                                <a class="text-white text-uppercase font-weight-semi-bold" 
+                                <a class="text-white text-uppercase font-weight-semi-bold"
                                    href="{{ route('frontend.beritaDetail', $berita->slug) }}">{{ $berita->judul }}</a>
                             </div>
                             @empty
@@ -119,7 +119,7 @@
                                 href="">{{ $berita->kategori->name }}</a>
                             <a class="text-white" href=""><small>{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</small></a>
                         </div>
-                        <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold" 
+                        <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold"
                                href="{{ route('frontend.beritaDetail', $berita->slug) }}">{{ Str::limit($berita->judul, 50) }}</a>
                     </div>
                 </div>
@@ -151,7 +151,7 @@
                         <div class="col-12">
                             <div class="section-title">
                                 <h4 class="m-0 text-uppercase font-weight-bold">Berita Terbaru</h4>
-                                <a class="text-secondary font-weight-medium text-decoration-none" href="">View All</a>
+                                {{-- <a class="text-secondary font-weight-medium text-decoration-none" href="">View All</a> --}}
                             </div>
                         </div>
 
@@ -159,7 +159,7 @@
                             <div class="row news-lg mx-0 mb-3">
                                 @forelse($beritaUtama as $berita)
                                 <div class="col-md-6 h-100 px-0">
-                                    <img class="img-fluid h-100" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover;">
+                                    <img class="img-fluid h-100" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover; width: 700px; height: 435px;">
                                 </div>
                                 <div class="col-md-6 d-flex flex-column border bg-white h-100 px-0">
                                     <div class="mt-auto p-4">
@@ -168,13 +168,13 @@
                                                 href="">{{ $berita->kategori->name }}</a>
                                             <a class="text-body" href=""><small>{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</small></a>
                                         </div>
-                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold" 
+                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"
                                href="{{ route('frontend.beritaDetail', $berita->slug) }}">{{ $berita->judul }}</a>
                                         <p class="m-0">{{ Str::limit($berita->isi, 100) }}</p>
                                     </div>
                                     <div class="d-flex justify-content-between bg-white border-top mt-auto p-4">
                                         <div class="d-flex align-items-center">
-                                            <img class="rounded-circle mr-2" src="{{ asset('storage/' . $berita->user->image) }}" width="25" height="25" alt="">
+                                            {{-- <img class="rounded-circle mr-2" src="{{ asset('storage/' . $berita->user->image) }}" width="25" height="25" alt=""> --}}
                                             <small>{{ $berita->user->name }}</small>
                                         </div>
                                         <div class="d-flex align-items-center">
@@ -211,58 +211,21 @@
                                 @endforelse
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            @foreach($lamanBerita->take(10) as $berita)
+                        <div class="col-lg-12">
+                            @foreach($lamanBerita as $berita)
                             <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover;" alt="">
+                                <img class="img-fluid" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover; width: 110px; height: 110px;" alt="">
                                 <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
                                         <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                                            href="">{{ $berita->kategori->name }}</a>
+                                           href="">{{ $berita->kategori->name }}</a>
                                         <a class="text-body" href=""><small>{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</small></a>
                                     </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="{{ route('frontend.beritaDetail', $berita->slug) }}">{{ Str::limit($berita->judul, 50) }}</a>
+                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
+                                       href="{{ route('frontend.beritaDetail', $berita->slug) }}">{{ Str::limit($berita->judul, 50) }}</a>
                                 </div>
                             </div>
                             @endforeach
-                        </div>
-                        <div class="col-lg-6">
-                            @foreach($lamanBerita->skip(10)->take(10) as $berita)
-                            <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover;" alt="">
-                                <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                                            href="">{{ $berita->kategori->name }}</a>
-                                        <a class="text-body" href=""><small>{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</small></a>
-                                    </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" 
-                               href="{{ route('frontend.beritaDetail', $berita->slug) }}">{{ Str::limit($berita->judul, 50) }}</a>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="{{ asset('news') }}/img/news-110x110-3.jpg" alt="">
-                                <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Business</a>
-                                        <a class="text-body" href=""><small>Jan 01, 2045</small></a>
-                                    </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum dolor sit amet elit...</a>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="{{ asset('news') }}/img/news-110x110-4.jpg" alt="">
-                                <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                    <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Business</a>
-                                        <a class="text-body" href=""><small>Jan 01, 2045</small></a>
-                                    </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum dolor sit amet elit...</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -272,12 +235,7 @@
 
                     <!-- Ads Start -->
                     <div class="mb-3">
-                        <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">Advertisement</h4>
-                        </div>
-                        <div class="bg-white text-center border border-top-0 p-3">
-                            <a href=""><img class="img-fluid" src="{{ asset('news') }}/img/news-800x500-2.jpg" alt=""></a>
-                        </div>
+                        @include('fe.components.advertisement')
                     </div>
                     <!-- Ads End -->
 
@@ -289,14 +247,14 @@
                         <div class="bg-white border border-top-0 p-3">
                             @forelse($beritaPopuler as $berita)
                             <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover;" alt="">
+                                <img class="img-fluid" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover; width: 110px; height: 110px;" alt="">
                                 <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
                                         <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
                                             href="">{{ $berita->kategori->name }}</a>
                                         <a class="text-body" href=""><small>{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</small></a>
                                     </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" 
+                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
                                href="{{ route('frontend.beritaDetail', $berita->slug) }}">{{ Str::limit($berita->judul, 50) }}</a>
                                 </div>
                             </div>
@@ -343,7 +301,7 @@
 
                             <div class="d-flex flex-wrap m-n1">
                                 @foreach ($kategori as $item)
-                                <a href="{{ route('frontend.' . strtolower(str_replace(' ', '', $item->name))) }}" 
+                                <a href="{{ route('frontend.' . strtolower(str_replace(' ', '', $item->name))) }}"
                                    class="btn btn-sm btn-outline-secondary m-1">{{ $item->name }}</a>
                                 @endforeach
                             </div>

@@ -42,4 +42,19 @@ class Berita extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+        
+        static::creating(function ($berita) {
+            $berita->slug = str()->slug($berita->judul);
+        });
+        
+        static::updating(function ($berita) {
+            if ($berita->isDirty('judul')) {
+                $berita->slug = str()->slug($berita->judul);
+            }
+        });
+    }
 }
