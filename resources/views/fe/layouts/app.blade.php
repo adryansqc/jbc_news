@@ -36,7 +36,7 @@
                 <nav class="navbar navbar-expand-sm bg-dark p-0">
                     <ul class="navbar-nav ml-n2">
                         <li class="nav-item border-right border-secondary">
-                            <a class="nav-link text-body small" href="#">Monday, January 1, 2045</a>
+                            <a class="nav-link text-body small" href="#">{{ \Carbon\Carbon::now()->locale('id')->isoFormat('dddd, D MMMM Y') }}</a>
                         </li>
                         <li class="nav-item border-right border-secondary">
                             <a class="nav-link text-body small" href="#">Advertise</a>
@@ -45,7 +45,7 @@
                             <a class="nav-link text-body small" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-body small" href="#">Login</a>
+                            <a class="nav-link text-body small" href="{{ url('/admin/login') }}">Login</a>
                         </li>
                     </ul>
                 </nav>
