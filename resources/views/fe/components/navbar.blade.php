@@ -1,7 +1,7 @@
 <div class="container-fluid p-0">
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
         <a href="index.html" class="navbar-brand d-block d-lg-none">
-            <h1 class="m-0 display-5 text-uppercase text-primary">Biz<span class="text-white font-weight-normal">News</span></h1>
+            <h1 class="m-0 display-5 text-uppercase text-primary">Jam<span class="text-white font-weight-normal">bisnis.com</span></h1>
         </a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -20,4 +20,18 @@
             </div>
         </div>
     </nav>
+    
+    <!-- Mobile Search Bar -->
+    <div class="d-block d-lg-none bg-dark py-2">
+        <div class="container">
+            <form action="{{ route('frontend.search') }}" method="GET">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" placeholder="Cari berita..." value="{{ request('q') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
