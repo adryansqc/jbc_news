@@ -162,4 +162,27 @@ class FrontendController extends Controller
 
         return view('fe.pages.beritaDetail', compact('berita', 'beritaTerkait', 'beritaPopuler', 'kategori'));
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('q');
+        $berita = Berita::with(['kategori', 'user'])
+            ->where(function($q) use ($query) {
+                $q->where('judul', 'LIKE', "%{$query}%")
+                  ->orWhere('content', 'LIKE', "%{$query}%");
+            })
+            ->where('status', true)
+            ->orderBy('tanggal', 'desc')
+            ->paginate(10);
+
+        $beritaPopuler = Berita::with(['kategori', 'user'])
+            ->where('status', true)
+            ->orderBy('view', 'desc')
+            ->take(5)
+            ->get();
+
+        $kategori = Categorie::all();
+
+        return view('fe.pages.search', compact('berita', 'query', 'beritaPopuler', 'kategori'));
+    }
 }

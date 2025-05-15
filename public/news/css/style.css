@@ -2365,27 +2365,27 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #212529;
-  background-color: #FFCC00;
-  border-color: #FFCC00;
+  background-color: #00d3ff;
+  border-color: #00d3ff;
 }
 
 .btn-primary:hover {
   color: #212529;
-  background-color: #d9ad00;
-  border-color: #cca300;
+  background-color: #00d3ff;
+  border-color: #00d3ff;
 }
 
 .btn-primary:focus, .btn-primary.focus {
   color: #212529;
-  background-color: #d9ad00;
-  border-color: #cca300;
-  box-shadow: 0 0 0 0.2rem rgba(222, 179, 6, 0.5);
+  background-color: #00d3ff;
+  border-color: #00d3ff;
+  box-shadow: 0 0 0 0.2rem rgba(6, 208, 222, 0.5);
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
   color: #212529;
-  background-color: #FFCC00;
-  border-color: #FFCC00;
+  background-color: #00d3ff;
+  border-color: #00d3ff;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
@@ -4670,7 +4670,7 @@ a.badge:hover, a.badge:focus {
 
 .badge-primary {
   color: #212529;
-  background-color: #FFCC00;
+  background-color: #00d3ff;
 }
 
 a.badge-primary:hover, a.badge-primary:focus {
@@ -6094,7 +6094,7 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #FFCC00 !important;
+  background-color: #00d3ff !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -9264,7 +9264,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #FFCC00 !important;
+  color: #00d3ff !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {
@@ -9516,7 +9516,7 @@ h6,
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link.active {
   color: #1E2024;
-  background: #FFCC00;
+  background: #00d3ff;
 }
 
 @media (max-width: 991.98px) {
@@ -9546,7 +9546,7 @@ h6,
 
 .main-carousel .owl-dot.active {
   width: 40px;
-  background: #FFCC00;
+  background: #00d3ff;
 }
 
 .tranding-carousel .owl-nav {
@@ -9602,7 +9602,7 @@ h6,
   justify-content: space-between;
   background: #FFFFFF;
   border: 1px solid #dee2e6;
-  border-left: 5px solid #FFCC00;
+  border-left: 5px solid #00d3ff;
 }
 
 .news-carousel .owl-nav {

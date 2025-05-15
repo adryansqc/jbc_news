@@ -38,12 +38,12 @@
                         <li class="nav-item border-right border-secondary">
                             <a class="nav-link text-body small" href="#">{{ \Carbon\Carbon::now()->locale('id')->isoFormat('dddd, D MMMM Y') }}</a>
                         </li>
-                        <li class="nav-item border-right border-secondary">
+                        {{-- <li class="nav-item border-right border-secondary">
                             <a class="nav-link text-body small" href="#">Advertise</a>
                         </li>
                         <li class="nav-item border-right border-secondary">
                             <a class="nav-link text-body small" href="#">Contact</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link text-body small" href="{{ url('/admin/login') }}">Login</a>
                         </li>
@@ -53,7 +53,7 @@
             <div class="col-lg-3 text-right d-none d-md-block">
                 <nav class="navbar navbar-expand-sm bg-dark p-0">
                     <ul class="navbar-nav ml-auto mr-n2">
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link text-body" href="#"><small class="fab fa-twitter"></small></a>
                         </li>
                         <li class="nav-item">
@@ -61,15 +61,15 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-body" href="#"><small class="fab fa-linkedin-in"></small></a>
+                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link text-body" href="https://www.instagram.com/jambisnis_?igsh=ajFkaGh4ZHlraWVi" target="_blank"><small class="fab fa-instagram"></small></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-body" href="#"><small class="fab fa-instagram"></small></a>
+                            <a class="nav-link text-body" href="https://www.tiktok.com/@jambisnisnews?_t=ZS-8wLophnIGGG&_r=1" target="_blank"><small class="fab fa-tiktok"></small></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-body" href="#"><small class="fab fa-google-plus-g"></small></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-body" href="#"><small class="fab fa-youtube"></small></a>
+                            <a class="nav-link text-body" href="https://youtube.com/@jbc_tv?si=aklVYdEIt-vMIzTx" target="_blank"><small class="fab fa-youtube"></small></a>
                         </li>
                     </ul>
                 </nav>
@@ -77,13 +77,25 @@
         </div>
         <div class="row align-items-center bg-white py-3 px-lg-5">
             <div class="col-lg-4">
-                <a href="index.html" class="navbar-brand p-0 d-none d-lg-block">
+                <a href="/" class="navbar-brand p-0 d-none d-lg-block">
                     <h1 class="m-0 display-4 text-uppercase text-primary">jam<span class="text-secondary font-weight-normal">bisnis.com</span></h1>
                 </a>
             </div>
-            <div class="col-lg-8 text-center text-lg-right">
-                <a href="https://htmlcodex.com"><img class="img-fluid" src="img/ads-728x90.png" alt=""></a>
+            <div class="col-lg-8">
+                <form action="{{ route('frontend.search') }}" method="GET" class="float-right">
+                {{-- <form action="#" method="GET" class="float-right"> --}}
+                    <div class="input-group" style="max-width: 300px;">
+                        <input type="text" class="form-control" name="q" placeholder="Cari berita..." value="{{ request('q') }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
             </div>
+        </div>
+            {{-- <div class="col-lg-8 text-center text-lg-right">
+                <a href="https://htmlcodex.com"><img class="img-fluid" src="img/ads-728x90.png" alt=""></a>
+            </div> --}}
         </div>
     </div>
     <!-- Topbar End -->

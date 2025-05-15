@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="col-lg-4">
-                    @include('fe.components.followus')
+                    {{-- @include('fe.components.followus') --}}
 
                     <!-- Ads Start -->
                     <div class="mb-3">

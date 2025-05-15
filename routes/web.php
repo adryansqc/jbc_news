@@ -17,3 +17,4 @@ Route::get('/internasional', [FrontendController::class, 'internasional'])->name
 Route::get('/kuliner', [FrontendController::class, 'kuliner'])->name('frontend.kuliner');
 Route::get('/otobiz', [FrontendController::class, 'otobiz'])->name('frontend.otobiz');
 Route::get('/berita/{slug}', [FrontendController::class, 'beritaDetail'])->name('frontend.beritaDetail');
+Route::get('/search', [FrontendController::class, 'search'])->name('frontend.search');

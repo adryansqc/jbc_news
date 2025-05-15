@@ -51,6 +51,44 @@
     </div>
     <!-- Breaking News End -->
 
+    <!-- Social Share Start -->
+    <div class="container-fluid mb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex">
+                        <a href="https://wa.me/?text={{ urlencode($berita->judul . ' ' . url()->current()) }}"
+                           target="_blank"
+                           class="btn btn-success mr-2">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}"
+                           target="_blank"
+                           class="btn btn-primary mr-2">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?text={{ urlencode($berita->judul) }}&url={{ urlencode(url()->current()) }}"
+                           target="_blank"
+                           class="btn btn-info mr-2">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(url()->current()) }}&title={{ urlencode($berita->judul) }}"
+                           target="_blank"
+                           class="btn btn-primary mr-2">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://t.me/share/url?url={{ urlencode(url()->current()) }}&text={{ urlencode($berita->judul) }}"
+                           target="_blank"
+                           class="btn btn-info">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Social Share End -->
+
     <!-- News With Sidebar Start -->
     <div class="container-fluid">
         <div class="container">
@@ -58,10 +96,8 @@
                 <div class="col-lg-8">
                     <!-- News Detail Start -->
                     <div class="position-relative mb-3">
-                        <img class="img-fluid w-100" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover; height: 500px;" alt="{{ $berita->ket_image }}">
                         <div class="bg-white border border-top-0 p-4">
                             <div class="mb-3">
-                                <p>{{ $berita->ket_image }}</p>
                                 <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
                                     href="{{ route('frontend.' . strtolower(str_replace(' ', '', $berita->kategori->name))) }}">
                                     {{ $berita->kategori->name }}
@@ -69,6 +105,8 @@
                                 <a class="text-body" href="">{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</a>
                             </div>
                             <h1 class="mb-3 text-secondary text-uppercase font-weight-bold">{{ $berita->judul }}</h1>
+                            <img class="img-fluid w-100" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover; height: 500px;" alt="{{ $berita->ket_image }}">
+                            <p>{{ $berita->ket_image }}</p>
                             <div class="content-berita">
                                 {!! $berita->content !!}
                             </div>
@@ -87,7 +125,7 @@
 
                 <div class="col-lg-4">
                     <!-- Social Follow Start -->
-                    @include('fe.components.followus')
+                    {{-- @include('fe.components.followus') --}}
                     <!-- Social Follow End -->
 
                     <!-- Ads Start -->
