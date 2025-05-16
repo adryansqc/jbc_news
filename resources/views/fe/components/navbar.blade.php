@@ -1,7 +1,7 @@
 <div class="container-fluid p-0">
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
-        <a href="index.html" class="navbar-brand d-block d-lg-none">
-            <h1 class="m-0 display-5 text-uppercase text-primary">Jam<span class="text-white font-weight-normal">bisnis.com</span></h1>
+        <a href="{{ route('frontend.index') }}" class="navbar-brand d-block d-lg-none">
+            <img src="{{ asset('news') }}/img/logo.jpeg" alt="JamBisnis Logo" class="img-fluid" style="max-height: 50px;">
         </a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -20,7 +20,7 @@
             </div>
         </div>
     </nav>
-    
+
     <!-- Mobile Search Bar -->
     <div class="d-block d-lg-none bg-dark py-2">
         <div class="container">

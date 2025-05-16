@@ -47,8 +47,21 @@
                 @endforeach
             </div>
         </div>
+        
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h5 class="mb-4 text-white text-uppercase font-weight-bold">Tentang Kami</h5>
+            <div class="d-flex flex-column">
+                <a href="{{ route('frontend.aboutus') }}" class="text-white mb-2">
+                    <i class="fa fa-angle-right mr-2"></i>About Us
+                </a>
+                <a href="{{ route('frontend.redaksi') }}" class="text-white mb-2">
+                    <i class="fa fa-angle-right mr-2"></i>Redaksi
+                </a>
+            </div>
+        </div>
     </div>
 </div>
+
 <div class="container-fluid py-4 px-sm-3 px-md-5" style="background: #111111;">
     <p class="m-0 text-center">&copy; <a href="#"></a>
 

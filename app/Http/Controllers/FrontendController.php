@@ -79,7 +79,7 @@ class FrontendController extends Controller
     {
         $nasional = Berita::with(['kategori', 'user'])
             ->whereHas('kategori', function ($query) {
-                $query->where('name', 'Properti');
+                $query->where('name', 'Nasional');
             })
             ->where('status', true)
             ->orderBy('tanggal', 'desc')
@@ -93,7 +93,7 @@ class FrontendController extends Controller
     {
         $internasional = Berita::with(['kategori', 'user'])
             ->whereHas('kategori', function ($query) {
-                $query->where('name', 'Properti');
+                $query->where('name', 'Internasional');
             })
             ->where('status', true)
             ->orderBy('tanggal', 'desc')
@@ -107,7 +107,7 @@ class FrontendController extends Controller
     {
         $kuliner = Berita::with(['kategori', 'user'])
             ->whereHas('kategori', function ($query) {
-                $query->where('name', 'Properti');
+                $query->where('name', 'Kuliner');
             })
             ->where('status', true)
             ->orderBy('tanggal', 'desc')
@@ -121,7 +121,7 @@ class FrontendController extends Controller
     {
         $otobiz = Berita::with(['kategori', 'user'])
             ->whereHas('kategori', function ($query) {
-                $query->where('name', 'Properti');
+                $query->where('name', 'Otobiz');
             })
             ->where('status', true)
             ->orderBy('tanggal', 'desc')
@@ -167,9 +167,9 @@ class FrontendController extends Controller
     {
         $query = $request->input('q');
         $berita = Berita::with(['kategori', 'user'])
-            ->where(function($q) use ($query) {
+            ->where(function ($q) use ($query) {
                 $q->where('judul', 'LIKE', "%{$query}%")
-                  ->orWhere('content', 'LIKE', "%{$query}%");
+                    ->orWhere('content', 'LIKE', "%{$query}%");
             })
             ->where('status', true)
             ->orderBy('tanggal', 'desc')
@@ -184,5 +184,15 @@ class FrontendController extends Controller
         $kategori = Categorie::all();
 
         return view('fe.pages.search', compact('berita', 'query', 'beritaPopuler', 'kategori'));
+    }
+
+    public function aboutus()
+    {
+        return view('fe.pages.aboutus');
+    }
+
+    public function redaksi()
+    {
+        return view('fe.pages.redaksi');
     }
 }
