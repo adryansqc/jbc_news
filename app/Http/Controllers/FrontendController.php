@@ -10,13 +10,14 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $sliderBerita = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('tanggal', 'desc')->take(3)->get();
-        $beritaTerbaru = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('tanggal', 'desc')->take(4)->get();
-        $beritaUtama = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('tanggal', 'desc')->take(1)->get();
+        $sliderBerita = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('created_at', 'desc')->take(3)->get();
+        $beritaTerbaru = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('created_at', 'desc')->take(4)->get();
+        $beritaUtama = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('created_at', 'desc')->take(1)->get();
         $beritaPopuler = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('view', 'desc')->take(5)->get();
-        $lamanBerita = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('tanggal', 'desc')->take(20)->get();
+        $lamanBeritaAtas = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('created_at', 'desc')->take(5)->get();
+        $lamanBeritaBawah = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('created_at', 'desc')->skip(5)->take(5)->get();
         $kategori = Categorie::all();
-        return view('fe.pages.home', compact('sliderBerita', 'beritaTerbaru', 'beritaPopuler', 'beritaUtama', 'lamanBerita', 'kategori'));
+        return view('fe.pages.home', compact('sliderBerita', 'beritaTerbaru', 'beritaPopuler', 'beritaUtama', 'lamanBeritaAtas', 'lamanBeritaBawah', 'kategori'));
     }
 
     public function ekbisJambi()
@@ -26,7 +27,7 @@ class FrontendController extends Controller
                 $query->where('name', 'Ekbis Jambi');
             })
             ->where('status', true)
-            ->orderBy('tanggal', 'desc')
+            ->orderBy('created_at', 'desc')
             ->take(10)
             ->paginate(10);
         $beritaPopuler = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('view', 'desc')->take(5)->get();
@@ -40,7 +41,7 @@ class FrontendController extends Controller
                 $query->where('name', 'Peluang Usaha');
             })
             ->where('status', true)
-            ->orderBy('tanggal', 'desc')
+            ->orderBy('created_at', 'desc')
             ->take(10)
             ->paginate(10);
         $beritaPopuler = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('view', 'desc')->take(5)->get();
@@ -54,7 +55,7 @@ class FrontendController extends Controller
                 $query->where('name', 'Perbankan');
             })
             ->where('status', true)
-            ->orderBy('tanggal', 'desc')
+            ->orderBy('created_at', 'desc')
             ->take(10)
             ->paginate(10);
         $beritaPopuler = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('view', 'desc')->take(5)->get();
@@ -68,7 +69,7 @@ class FrontendController extends Controller
                 $query->where('name', 'Properti');
             })
             ->where('status', true)
-            ->orderBy('tanggal', 'desc')
+            ->orderBy('created_at', 'desc')
             ->take(10)
             ->paginate(10);
         $beritaPopuler = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('view', 'desc')->take(5)->get();
@@ -82,7 +83,7 @@ class FrontendController extends Controller
                 $query->where('name', 'Nasional');
             })
             ->where('status', true)
-            ->orderBy('tanggal', 'desc')
+            ->orderBy('created_at', 'desc')
             ->take(10)
             ->paginate(10);
         $beritaPopuler = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('view', 'desc')->take(5)->get();
@@ -96,7 +97,7 @@ class FrontendController extends Controller
                 $query->where('name', 'Internasional');
             })
             ->where('status', true)
-            ->orderBy('tanggal', 'desc')
+            ->orderBy('created_at', 'desc')
             ->take(10)
             ->paginate(10);
         $beritaPopuler = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('view', 'desc')->take(5)->get();
@@ -110,7 +111,7 @@ class FrontendController extends Controller
                 $query->where('name', 'Kuliner');
             })
             ->where('status', true)
-            ->orderBy('tanggal', 'desc')
+            ->orderBy('created_at', 'desc')
             ->take(10)
             ->paginate(10);
         $beritaPopuler = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('view', 'desc')->take(5)->get();
@@ -124,7 +125,7 @@ class FrontendController extends Controller
                 $query->where('name', 'Otobiz');
             })
             ->where('status', true)
-            ->orderBy('tanggal', 'desc')
+            ->orderBy('created_at', 'desc')
             ->take(10)
             ->paginate(10);
         $beritaPopuler = Berita::with(['kategori', 'user'])->where('status', true)->orderBy('view', 'desc')->take(5)->get();
@@ -172,7 +173,7 @@ class FrontendController extends Controller
                     ->orWhere('content', 'LIKE', "%{$query}%");
             })
             ->where('status', true)
-            ->orderBy('tanggal', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(10);
 
         $beritaPopuler = Berita::with(['kategori', 'user'])

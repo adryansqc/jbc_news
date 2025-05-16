@@ -212,7 +212,24 @@
                             </div>
                         </div>
                         <div class="col-lg-12">
-                            @foreach($lamanBerita as $berita)
+                            @foreach($lamanBeritaAtas as $berita)
+                            <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+                                <img class="img-fluid" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover; width: 110px; height: 110px;" alt="">
+                                <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                    <div class="mb-2">
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
+                                           href="">{{ $berita->kategori->name }}</a>
+                                        <a class="text-body" href=""><small>{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</small></a>
+                                    </div>
+                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
+                                       href="{{ route('frontend.beritaDetail', $berita->slug) }}">{{ Str::limit($berita->judul, 50) }}</a>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                        @include('fe.components.corausel')
+                        <div class="col-lg-12">
+                            @foreach($lamanBeritaBawah as $berita)
                             <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
                                 <img class="img-fluid" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover; width: 110px; height: 110px;" alt="">
                                 <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
