@@ -5,9 +5,19 @@
 <head>
     <meta charset="utf-8">
     <title>@yield('title')-JBC News</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    @if(isset($berita))
+    <meta property="og:title" content="{{ $berita->judul }}" />
+    <meta property="og:description" content="{{ Str::limit(strip_tags($berita->content), 200) }}" />
+    <meta property="og:image" content="{{ asset('storage/' . $berita->image) }}" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:type" content="article" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $berita->judul }}">
+    <meta name="twitter:description" content="{{ Str::limit(strip_tags($berita->content), 200) }}">
+    <meta name="twitter:image" content="{{ asset('storage/' . $berita->image) }}">
+    @endif
 
     <!-- Favicon -->
     <link href="{{ asset('news') }}/img/logo.jpeg" rel="icon">
@@ -26,6 +36,9 @@
     <link href="{{ asset('news') }}/css/style.css" rel="stylesheet">
 
     @stack('style')
+
+    <!-- OpenGraph Meta Tags -->
+
 </head>
 
 <body>

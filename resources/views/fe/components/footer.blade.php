@@ -1,6 +1,6 @@
 @php
     $kategories = App\Models\Categorie::all();
-    $beritaPopuler = App\Models\Berita::with(['kategori', 'user'])->where('status', true)->orderBy('view', 'desc')->take(3)->get();
+    $beritaPopuler = App\Models\Berita::with(['kategori:id,name', 'user'])->where('status', true)->orderBy('view', 'desc')->take(3)->get();
 @endphp
 <!-- Footer Start -->
 <div class="container-fluid bg-dark pt-5 px-sm-3 px-md-5 mt-5">
@@ -25,8 +25,8 @@
                 @foreach ($beritaPopuler as $item)
                 <div class="mb-2">
                     <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                       href="{{ route('frontend.' . strtolower(str_replace(' ', '', $item->kategori->name))) }}">
-                        {{ $item->kategori->name }}
+                       href="{{ route('frontend.' . strtolower(str_replace(' ', '', $item->kategori->first()->name))) }}">
+                       {{ $item->kategori->first()->name }}
                     </a>
                     <a class="text-body" href="">
                         <small>{{ \Carbon\Carbon::parse($item->tanggal)->locale('id')->isoFormat('D MMMM Y') }}</small>
@@ -47,7 +47,7 @@
                 @endforeach
             </div>
         </div>
-        
+
         <div class="col-lg-3 col-md-6 mb-5">
             <h5 class="mb-4 text-white text-uppercase font-weight-bold">Tentang Kami</h5>
             <div class="d-flex flex-column">

@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('beritas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('kategori_id')->constrained('categories')->onDelete('cascade');
+            // $table->foreignId('kategori_id')->constrained('categories')->onDelete('cascade');
             $table->string('judul');
             $table->date('tanggal')->nullable();
             $table->boolean('status')->nullable();
+            $table->boolean('breaking_news')->nullable();
             $table->integer('view')->default(0);
             $table->string('image')->nullable();
             $table->string('ket_image')->nullable();

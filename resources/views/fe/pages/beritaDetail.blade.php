@@ -99,14 +99,14 @@
                         <div class="bg-white border border-top-0 p-4">
                             <div class="mb-3">
                                 <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                    href="{{ route('frontend.' . strtolower(str_replace(' ', '', $berita->kategori->name))) }}">
-                                    {{ $berita->kategori->name }}
+                                    href="{{ route('frontend.' . strtolower(str_replace(' ', '',  $berita->kategori->first()->name ))) }}">
+                                    {{ $berita->kategori->first()->name }}
                                 </a>
                                 <a class="text-body" href="">{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</a>
                             </div>
                             <h1 class="mb-3 text-secondary text-uppercase font-weight-bold">{{ $berita->judul }}</h1>
                             <img class="img-fluid w-100" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover; height: 500px;" alt="{{ $berita->ket_image }}">
-                            <p>{{ $berita->ket_image }}</p>
+                            <p class="text-muted small" style="font-size: 0.85rem;">{{ $berita->ket_image }}</p>
                             <div class="content-berita">
                                 {!! $berita->content !!}
                             </div>
@@ -146,7 +146,7 @@
                                 <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
                                         <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                                            href="">{{ $popular->kategori->name }}</a>
+                                            href="">{{ $popular->kategori->first()->name }}</a>
                                         <a class="text-body" href=""><small>{{ \Carbon\Carbon::parse($popular->tanggal)->format('d M Y') }}</small></a>
                                     </div>
                                     <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"

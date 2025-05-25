@@ -10,4 +10,9 @@ class Categorie extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function beritas()
+    {
+        return $this->belongsToMany(Berita::class, 'berita_categorie')->withTimestamps();
+    }
 }

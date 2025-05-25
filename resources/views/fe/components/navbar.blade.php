@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
             <div class="navbar-nav mr-auto py-0">
                 <a href="{{ route('frontend.index') }}" class="nav-item nav-link small {{ Route::is('frontend.index') ? 'active' : '' }}">Beranda</a>
-                <a href="{{ route('frontend.ekbisjambi') }}" class="nav-item nav-link small {{ Route::is('frontend.ekbisjambi') ? 'active' : '' }}">Ekbis Jambi</a>
+                <a href="{{ route('frontend.bisnisjambi') }}" class="nav-item nav-link small {{ Route::is('frontend.bisnisjambi') ? 'active' : '' }}">Bisnis Jambi</a>
                 <a href="{{ route('frontend.peluangusaha') }}" class="nav-item nav-link small {{ Route::is('frontend.peluangusaha') ? 'active' : '' }}">Peluang Usaha</a>
                 <a href="{{ route('frontend.perbankan') }}" class="nav-item nav-link small {{ Route::is('frontend.perbankan') ? 'active' : '' }}">Perbankan</a>
                 <a href="{{ route('frontend.properti') }}" class="nav-item nav-link small {{ Route::is('frontend.properti') ? 'active' : '' }}">Properti</a>

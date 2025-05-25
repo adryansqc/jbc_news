@@ -6,11 +6,11 @@
         <div class="owl-carousel news-carousel carousel-item-4 position-relative">
             @forelse($beritaPopuler as $berita)
             <div class="position-relative overflow-hidden" style="height: 180px;">
-                <img class="img-fluid h-100 w-100" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover;">
+                <img class="img-fluid h-100 w-100" src="{{ asset('storage/' . $berita->image) }}">
                 <div class="overlay">
                     <div class="mb-1">
                         <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-1 small"
-                            href="" style="font-size: 10px;">{{ $berita->kategori->name }}</a>
+                            href="" style="font-size: 10px;">{{ $berita->kategori->first()->name }}</a>
                         <small class="text-white">{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</small>
                     </div>
                     <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold small"
@@ -19,7 +19,7 @@
             </div>
             @empty
             <div class="position-relative overflow-hidden" style="height: 180px;">
-                <img class="img-fluid h-100 w-100" src="{{ asset('news') }}/img/news-700x435-1.jpg" style="object-fit: cover;">
+                <img class="img-fluid h-100 w-100" src="{{ asset('news') }}/img/news-700x435-1.jpg">
                 <div class="overlay">
                     <div class="mb-1">
                         <span class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2">Info</span>

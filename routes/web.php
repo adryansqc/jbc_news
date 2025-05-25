@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
-Route::get('/ekbis-jambi', [FrontendController::class, 'ekbisJambi'])->name('frontend.ekbisjambi');
+Route::get('/ekbis-jambi', [FrontendController::class, 'ekbisJambi'])->name('frontend.bisnisjambi');
 Route::get('/peluang-usaha', [FrontendController::class, 'peluangUsaha'])->name('frontend.peluangusaha');
 Route::get('/perbankan', [FrontendController::class, 'perbankan'])->name('frontend.perbankan');
 Route::get('/properti', [FrontendController::class, 'properti'])->name('frontend.properti');
