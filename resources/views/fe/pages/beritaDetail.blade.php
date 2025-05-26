@@ -106,7 +106,17 @@
                             </div>
                             <h1 class="mb-3 text-secondary text-uppercase font-weight-bold">{{ $berita->judul }}</h1>
                             <img class="img-fluid w-100" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover; height: 500px;" alt="{{ $berita->ket_image }}">
-                            <p class="text-muted small" style="font-size: 0.85rem;">{{ $berita->ket_image }}</p>
+                            <p class="text-muted small mb-4" style="font-size: 0.85rem;"><i class="far fa-image mr-2"></i>{{ $berita->ket_image }}</p>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="mr-4">
+                                    <small class="text-muted">Reporter:</small>
+                                    <p class="text-primary mb-0" style="font-size: 0.9rem;">{{ $berita->reporter->nama }}</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Editor:</small>
+                                    <p class="text-primary mb-0" style="font-size: 0.9rem;">{{ $berita->editor->nama }}</p>
+                                </div>
+                            </div>
                             <div class="content-berita">
                                 {!! $berita->content !!}
                             </div>

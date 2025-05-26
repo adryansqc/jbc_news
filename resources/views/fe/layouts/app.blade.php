@@ -20,7 +20,7 @@
     @endif
 
     <!-- Favicon -->
-    <link href="{{ asset('news') }}/img/logo.jpeg" rel="icon">
+    <link href="{{ asset('news') }}/img/favicon.jpeg" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -34,6 +34,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('news') }}/css/style.css" rel="stylesheet">
+    <link href="{{ asset('news') }}/css/mobile.css" rel="stylesheet">
 
     @stack('style')
 
@@ -92,7 +93,7 @@
             <div class="col-lg-4">
                 <div class="col-lg-4">
                     <a href="/" class="navbar-brand p-0 d-none d-lg-block">
-                        <img src="{{ asset('news') }}/img/logo.jpeg" alt="JamBisnis Logo" style="height: 60px;">
+                        <img src="{{ asset('news') }}/img/logo2.jpeg" alt="JamBisnis Logo" style="height: 60px;">
                     </a>
                 </div>
             </div>
