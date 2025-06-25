@@ -24,6 +24,10 @@ class FrontendController extends Controller
 
         $breakingNews = Berita::where('breaking_news', true)
             ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
             ->get();
 
         $beritaUtama = Berita::with(['kategori:id,name', 'user'])
@@ -34,22 +38,18 @@ class FrontendController extends Controller
 
         $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
             ->orderBy('view', 'desc')
             ->take(5)
             ->get();
 
-        $lamanBeritaAtas = Berita::with(['kategori:id,name', 'user'])
+        $lamanBerita = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
             ->orderBy('created_at', 'desc')
-            ->take(5)
-            ->get();
-
-        $lamanBeritaBawah = Berita::with(['kategori:id,name', 'user'])
-            ->where('status', true)
-            ->orderBy('created_at', 'desc')
-            ->skip(5)
-            ->take(15)
-            ->get();
+            ->paginate(10);
 
         $kategori = Categorie::all();
 
@@ -59,8 +59,7 @@ class FrontendController extends Controller
             'breakingNews',
             'beritaPopuler',
             'beritaUtama',
-            'lamanBeritaAtas',
-            'lamanBeritaBawah',
+            'lamanBerita',
             'kategori'
         ));
     }
@@ -276,9 +275,16 @@ class FrontendController extends Controller
             ->take(5)
             ->get();
 
+
+        $beritaTerbaru = Berita::with(['kategori', 'user'])
+            ->where('status', true)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
         $kategori = Categorie::all();
 
-        return view('fe.pages.beritaDetail', compact('berita', 'beritaTerkait', 'beritaPopuler', 'kategori'));
+        return view('fe.pages.beritaDetail', compact('berita', 'beritaTerkait', 'beritaPopuler', 'kategori', 'beritaTerbaru'));
     }
 
     public function search(Request $request)

@@ -130,7 +130,24 @@
                             </div>
                         </div>
                     </div>
-                    <!-- News Detail End -->
+                    <div>
+                        <div class="col-lg-12">                            
+                            @foreach($beritaTerbaru as $berita)
+                            <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+                                <img class="img-fluid" src="{{ $berita->image ? asset('storage/' . $berita->image) : asset('news') . '/img/news-800x500-1.jpg' }}" style="object-fit: cover; width: 110px; height: 110px;" alt="">
+                                <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                    <div class="mb-2">
+                                        <a class="badge badge-primary font-weight-semi-bold p-1 mr-2"
+                                           href="">{{ $berita->kategori->first()->name }}</a>
+                                        <a class="text-body" href=""><small>{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</small></a>
+                                    </div>
+                                    <a class="h6 m-0 text-secondary font-weight-bold"
+                                       href="{{ route('frontend.beritaDetail', $berita->slug) }}">{{ Str::limit($berita->judul, 50) }}</a>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-lg-4">
