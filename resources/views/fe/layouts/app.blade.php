@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Jambisnis, Bisnis, Jambi, Peluang Usaha, Peluang Bisnis, Ide Bisnis, Ide Usaha, UMKM, Tren Bisnis, Bisnis kekinian, Info Bisnis, Info Usaha" name="keywords">
     <meta content="Jambisnis adalah media digital informasi seputar bisnis. Hadir dalam berbagai platfom berupa; Website, Instagram, Tiktok, Youtube, Facebook. Kami menyajikan berita dan informasi akurat, paling update, dan terpercaya. Dapatkan juga pilihan informasi bisnis lokal, nasional, internasional yang bisa kamu akses kapan dan dimana saja." name="description">
-
+    
     @if(isset($berita))
     <meta property="og:title" content="{{ $berita->judul }}" />
     <meta property="og:description" content="{{ Str::limit(strip_tags($berita->content), 200) }}" />
@@ -133,7 +134,7 @@ function updateLiveTime() {
         day: 'numeric',
         timeZone: 'Asia/Jakarta'
     };
-
+    
     const timeOptions = {
         hour: '2-digit',
         minute: '2-digit',
@@ -141,10 +142,10 @@ function updateLiveTime() {
         timeZone: 'Asia/Jakarta',
         hour12: false
     };
-
+    
     const dateString = now.toLocaleDateString('id-ID', dateOptions);
     const timeString = now.toLocaleTimeString('id-ID', timeOptions);
-
+    
     document.getElementById('liveTime').textContent = `${dateString} ${timeString}`;
 }
 
