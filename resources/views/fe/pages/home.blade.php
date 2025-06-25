@@ -11,7 +11,7 @@
             <div class="col-lg-7 px-0">
                 <div class="owl-carousel main-carousel position-relative">
                     @forelse($sliderBerita as $berita)
-                    <div class="position-relative overflow-hidden main-slider-item">
+                    <div class="position-relative overflow-hidden" style="height: 500px;">
                         <img class="img-fluid h-100" src="{{ asset('storage/' . $berita->image) }}">
                         <div class="overlay">
                             <div class="mb-2">
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     @empty
-                    <div class="position-relative overflow-hidden main-slider-item">
+                    <div class="position-relative overflow-hidden" style="height: 500px;">
                         <img class="img-fluid h-100" src="{{ asset('news') }}/img/news-800x500-1.jpg">
                         <div class="overlay">
                             <div class="mb-2">
@@ -39,10 +39,10 @@
                 </div>
             </div>
             <div class="col-lg-5 px-0">
-                <div class="row mx-0 mobile-news-grid">
+                <div class="row mx-0">
                     @forelse($beritaTerbaru as $berita)
-                    <div class="col-6 px-0">
-                        <div class="position-relative overflow-hidden main-news">
+                    <div class="col-md-6 px-0">
+                        <div class="position-relative overflow-hidden" style="height: 250px;">
                             <img class="img-fluid w-100 h-100" src="{{ asset('storage/' . $berita->image) }}">
                             <div class="overlay">
                                 <div class="mb-2">
@@ -57,7 +57,7 @@
                     </div>
                     @empty
                     <div class="col-md-6 px-0">
-                        <div class="position-relative overflow-hidden main-news">
+                        <div class="position-relative overflow-hiddenm style="height: 250px;"ain-news">
                             <img class="img-fluid w-100 h-100" src="{{ asset('news') }}/img/news-700x435-1.jpg">
                             <div class="overlay">
                                 <div class="mb-2">
@@ -111,7 +111,7 @@
             </div>
             <div class="owl-carousel news-carousel carousel-item-4 position-relative">
                 @forelse($beritaPopuler as $berita)
-                <div class="position-relative overflow-hidden" style="height: 200px;">
+                <div class="position-relative overflow-hidden" style=3height: 200px;">
                     <img class="img-fluid h-100" src="{{ asset('storage/' . $berita->image) }}">
                     <div class="overlay">
                         <div class="mb-2">
@@ -156,10 +156,10 @@
                         </div>
 
                         <div class="col-lg-12">
-                            <div class="row mx-0 mb-3">
+                            <div class="row news-lg mx-0 mb-3">
                                 @forelse($beritaUtama as $berita)
                                 <div class="col-md-6 h-100 px-0">
-                                    <img class="img-fluid h-100 news-image" src="{{ asset('storage/' . $berita->image) }}">
+                                    <img class="img-fluid h-100" src="{{ asset('storage/' . $berita->image) }}" style="object-fit: cover; width: 700px; height: 435px;">
                                 </div>
                                 <div class="col-md-6 d-flex flex-column border bg-white h-100 px-0">
                                     <div class="mt-auto p-4">
@@ -169,7 +169,7 @@
                                             <a class="text-body" href=""><small>{{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</small></a>
                                         </div>
                                         <a class="h4 d-block mb-3 text-secondary font-weight-bold"
-                                            href="{{ route('frontend.beritaDetail', $berita->slug) }}">{{ $berita->judul }}</a>
+                               href="{{ route('frontend.beritaDetail', $berita->slug) }}">{{ $berita->judul }}</a>
                                         <p class="m-0">{{ Str::limit($berita->isi, 100) }}</p>
                                     </div>
                                     <div class="d-flex justify-content-between bg-white border-top mt-auto p-4">
