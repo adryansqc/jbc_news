@@ -1,5 +1,5 @@
 @php
-    $beritaPopuler = App\Models\Berita::with(['kategori', 'user'])->where('status', true)->orderBy('view', 'desc')->take(6)->get();
+    $beritaPopuler = App\Models\Berita::with(['kategori', 'user'])->where('status', true)->whereBetween('created_at', [ now()->startOfWeek(), now()->endOfWeek()])->orderBy('view', 'desc')->take(6)->get();
 @endphp
 <div class="container-fluid py-3">
     <div class="container">
