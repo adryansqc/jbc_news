@@ -138,12 +138,6 @@
                     {{-- @include('fe.components.followus') --}}
                     <!-- Social Follow End -->
 
-                    <!-- Ads Start -->
-                    <div class="mb-3">
-                        @include('fe.components.advertisement')
-                    </div>
-                    <!-- Ads End -->
-
                     <!-- Popular News Start -->
                     <div class="mb-3">
                         <div class="section-title mb-0">
