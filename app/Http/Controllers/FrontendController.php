@@ -14,6 +14,7 @@ class FrontendController extends Controller
             ->where('status', true)
             ->where('heading', true)
             ->orderBy('created_at', 'desc')
+            ->take(5)
             ->get();
 
         $beritaTerbaru = Berita::with(['kategori:id,name', 'user'])
@@ -24,10 +25,6 @@ class FrontendController extends Controller
 
         $breakingNews = Berita::where('breaking_news', true)
             ->where('status', true)
-            ->whereBetween('created_at', [
-                now()->startOfWeek(),
-                now()->endOfWeek()
-            ])
             ->get();
 
         $beritaUtama = Berita::with(['kategori:id,name', 'user'])
@@ -38,18 +35,22 @@ class FrontendController extends Controller
 
         $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
-            ->whereBetween('created_at', [
-                now()->startOfWeek(),
-                now()->endOfWeek()
-            ])
             ->orderBy('view', 'desc')
             ->take(5)
             ->get();
 
-        $lamanBerita = Berita::with(['kategori:id,name', 'user'])
+        $lamanBeritaAtas = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->take(5)
+            ->get();
+
+        $lamanBeritaBawah = Berita::with(['kategori:id,name', 'user'])
+            ->where('status', true)
+            ->orderBy('created_at', 'desc')
+            ->skip(5)
+            ->take(15)
+            ->get();
 
         $kategori = Categorie::all();
 
@@ -59,7 +60,8 @@ class FrontendController extends Controller
             'breakingNews',
             'beritaPopuler',
             'beritaUtama',
-            'lamanBerita',
+            'lamanBeritaAtas',
+            'lamanBeritaBawah',
             'kategori'
         ));
     }
@@ -275,16 +277,9 @@ class FrontendController extends Controller
             ->take(5)
             ->get();
 
-
-        $beritaTerbaru = Berita::with(['kategori', 'user'])
-            ->where('status', true)
-            ->orderBy('created_at', 'desc')
-            ->take(5)
-            ->get();
-
         $kategori = Categorie::all();
 
-        return view('fe.pages.beritaDetail', compact('berita', 'beritaTerkait', 'beritaPopuler', 'kategori', 'beritaTerbaru'));
+        return view('fe.pages.beritaDetail', compact('berita', 'beritaTerkait', 'beritaPopuler', 'kategori'));
     }
 
     public function search(Request $request)
@@ -307,7 +302,12 @@ class FrontendController extends Controller
 
         $kategori = Categorie::all();
 
-        return view('fe.pages.search', compact('berita', 'query', 'beritaPopuler', 'kategori'));
+        return view('fe.pages.search', [
+            'hasilPencarian' => $berita,
+            'query' => $query,
+            'beritaPopuler' => $beritaPopuler,
+            'kategori' => $kategori,
+        ]);
     }
 
     public function aboutus()
