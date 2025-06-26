@@ -267,6 +267,12 @@ class FrontendController extends Controller
             ->where('status', true)
             ->firstOrFail();
 
+        $beritaTerbaru = Berita::with(['kategori', 'user'])
+            ->where('status', true)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
         // Increment view count
         $berita->increment('view');
 
@@ -277,7 +283,7 @@ class FrontendController extends Controller
             ->whereHas('kategori', function ($query) use ($berita) {
                 $query->whereIn('categories.id', $berita->kategori->pluck('id'));
             })
-            ->take(3)
+            ->take(5)
             ->get();
 
         $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
@@ -292,7 +298,7 @@ class FrontendController extends Controller
 
         $kategori = Categorie::all();
 
-        return view('fe.pages.beritaDetail', compact('berita', 'beritaTerkait', 'beritaPopuler', 'kategori'));
+        return view('fe.pages.beritaDetail', compact('berita', 'beritaTerkait', 'beritaPopuler', 'kategori', 'beritaTerbaru'));
     }
 
     public function search(Request $request)
