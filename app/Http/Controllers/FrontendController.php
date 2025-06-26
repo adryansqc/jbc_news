@@ -290,7 +290,7 @@ class FrontendController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('q');
-        $berita = Berita::with(['kategori', 'user'])
+        $hasilPencarian = Berita::with(['kategori', 'user'])
             ->where(function ($q) use ($query) {
                 $q->where('judul', 'LIKE', "%{$query}%")
                     ->orWhere('content', 'LIKE', "%{$query}%");
@@ -307,7 +307,7 @@ class FrontendController extends Controller
 
         $kategori = Categorie::all();
 
-        return view('fe.pages.search', compact('berita', 'query', 'beritaPopuler', 'kategori'));
+        return view('fe.pages.search', compact('hasilPencarian', 'query', 'beritaPopuler', 'kategori'));
     }
 
     public function aboutus()
