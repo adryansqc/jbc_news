@@ -40,8 +40,8 @@
         }
 
         /* ===== CONTAINER & LAYOUT ===== */
-        .container-fluid { padding: 0; }
-        
+        .container-fluid { padding: 0; margin-top: 10px;}
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -560,7 +560,7 @@
                 <article class="article">
                     <header class="article-header">
                         <div class="article-meta">
-                            <a href="{{ route('frontend.' . strtolower(str_replace(' ', '',  $berita->kategori->first()->name ))) }}" 
+                            <a href="{{ route('frontend.' . strtolower(str_replace(' ', '',  $berita->kategori->first()->name ))) }}"
                                class="category-badge">
                                 {{ $berita->kategori->first()->name }}
                             </a>
@@ -569,10 +569,10 @@
                         <h1 class="article-title">{{ $berita->judul }}</h1>
                     </header>
 
-                    <img class="article-image" 
-                         src="{{ asset('storage/' . $berita->image) }}" 
+                    <img class="article-image"
+                         src="{{ asset('storage/' . $berita->image) }}"
                          alt="{{ $berita->ket_image }}">
-                    
+
                     @if($berita->ket_image)
                     <div class="image-caption">
                         <i class="far fa-image mr-2"></i>{{ $berita->ket_image }}
@@ -590,7 +590,7 @@
                                 <p class="credit-name">{{ $berita->editor->nama }}</p>
                             </div>
                         </div>
-                        
+
                         <div class="article-content content-berita">
                             {!! $berita->content !!}
                         </div>
@@ -613,15 +613,15 @@
                         <div class="sidebar-content">
                             @forelse($beritaPopuler as $popular)
                             <article class="popular-item">
-                                <img class="popular-image" 
-                                     src="{{ asset('storage/' . $popular->image) }}" 
+                                <img class="popular-image"
+                                     src="{{ asset('storage/' . $popular->image) }}"
                                      alt="{{ $popular->judul }}">
                                 <div class="popular-content">
                                     <div class="popular-meta">
                                         <span class="popular-category">{{ $popular->kategori->first()->name }}</span>
                                         <span class="popular-date">{{ \Carbon\Carbon::parse($popular->tanggal)->format('d M Y') }}</span>
                                     </div>
-                                    <a href="{{ route('frontend.beritaDetail', $popular->slug) }}" 
+                                    <a href="{{ route('frontend.beritaDetail', $popular->slug) }}"
                                        class="popular-title">
                                         {{ Str::limit($popular->judul, 80) }}
                                     </a>
@@ -641,7 +641,7 @@
                         <div class="sidebar-content">
                             <div class="tags-container">
                                 @foreach ($kategori as $item)
-                                <a href="{{ route('frontend.' . strtolower(str_replace(' ', '', $item->name))) }}" 
+                                <a href="{{ route('frontend.' . strtolower(str_replace(' ', '', $item->name))) }}"
                                    class="tag-item">{{ $item->name }}</a>
                                 @endforeach
                             </div>

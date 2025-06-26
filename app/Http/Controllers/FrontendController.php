@@ -76,10 +76,12 @@ class FrontendController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        $beritaPopuler = Berita::with(['kategori' => function ($query) {
-            $query->where('name', 'Bisnis Jambi');
-        }, 'user'])
+        $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
             ->orderBy('view', 'desc')
             ->take(5)
             ->get();
@@ -99,10 +101,12 @@ class FrontendController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        $beritaPopuler = Berita::with(['kategori' => function ($query) {
-            $query->where('name', 'Peluang Usaha');
-        }, 'user'])
+        $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
             ->orderBy('view', 'desc')
             ->take(5)
             ->get();
@@ -122,10 +126,12 @@ class FrontendController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        $beritaPopuler = Berita::with(['kategori' => function ($query) {
-            $query->where('name', 'Perbankan');
-        }, 'user'])
+        $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
             ->orderBy('view', 'desc')
             ->take(5)
             ->get();
@@ -145,10 +151,12 @@ class FrontendController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        $beritaPopuler = Berita::with(['kategori' => function ($query) {
-            $query->where('name', 'Properti');
-        }, 'user'])
+        $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
             ->orderBy('view', 'desc')
             ->take(5)
             ->get();
@@ -168,10 +176,12 @@ class FrontendController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        $beritaPopuler = Berita::with(['kategori' => function ($query) {
-            $query->where('name', 'Nasional');
-        }, 'user'])
+        $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
             ->orderBy('view', 'desc')
             ->take(5)
             ->get();
@@ -191,10 +201,12 @@ class FrontendController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        $beritaPopuler = Berita::with(['kategori' => function ($query) {
-            $query->where('name', 'Internasional');
-        }, 'user'])
+        $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
             ->orderBy('view', 'desc')
             ->take(5)
             ->get();
@@ -214,10 +226,12 @@ class FrontendController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        $beritaPopuler = Berita::with(['kategori' => function ($query) {
-            $query->where('name', 'Kuliner');
-        }, 'user'])
+        $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
             ->orderBy('view', 'desc')
             ->take(5)
             ->get();
@@ -237,10 +251,12 @@ class FrontendController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        $beritaPopuler = Berita::with(['kategori' => function ($query) {
-            $query->where('name', 'Otobiz');
-        }, 'user'])
+        $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
             ->orderBy('view', 'desc')
             ->take(5)
             ->get();
@@ -262,15 +278,19 @@ class FrontendController extends Controller
         // Get related news from same category
         $beritaTerkait = Berita::with(['kategori', 'user'])
             ->where('status', true)
-            ->where('beritas.id', '!=', $berita->id)  // Tambahkan nama tabel
+            ->where('beritas.id', '!=', $berita->id)
             ->whereHas('kategori', function ($query) use ($berita) {
-                $query->where('categories.id', $berita->kategori_id);  // Tambahkan nama tabel
+                $query->whereIn('categories.id', $berita->kategori->pluck('id'));
             })
             ->take(3)
             ->get();
 
-        $beritaPopuler = Berita::with(['kategori', 'user'])
+        $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
             ->orderBy('view', 'desc')
             ->take(5)
             ->get();
@@ -290,7 +310,7 @@ class FrontendController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('q');
-        $hasilPencarian = Berita::with(['kategori', 'user'])
+        $berita = Berita::with(['kategori', 'user'])
             ->where(function ($q) use ($query) {
                 $q->where('judul', 'LIKE', "%{$query}%")
                     ->orWhere('content', 'LIKE', "%{$query}%");
@@ -299,15 +319,24 @@ class FrontendController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        $beritaPopuler = Berita::with(['kategori', 'user'])
+        $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
             ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
             ->orderBy('view', 'desc')
             ->take(5)
             ->get();
 
         $kategori = Categorie::all();
 
-        return view('fe.pages.search', compact('hasilPencarian', 'query', 'beritaPopuler', 'kategori'));
+        return view('fe.pages.search', [
+            'hasilPencarian' => $berita,
+            'query' => $query,
+            'beritaPopuler' => $beritaPopuler,
+            'kategori' => $kategori,
+        ]);
     }
 
     public function aboutus()
