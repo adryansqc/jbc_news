@@ -4,6 +4,20 @@
     {{ $berita->judul }}
 @endsection
 
+@section('meta')
+    <meta property="og:title" content="{{ $berita->judul }}" />
+    <meta property="og:description" content="{{ Str::limit(strip_tags($berita->content), 200) }}" />
+    <meta property="og:image" content="{{ asset('storage/' . $berita->image) }}" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:type" content="article" />
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $berita->judul }}">
+    <meta name="twitter:description" content="{{ Str::limit(strip_tags($berita->content), 200) }}">
+    <meta name="twitter:image" content="{{ asset('storage/' . $berita->image) }}">
+@endsection
+
+
 @push('style')
     <style>
         .content-berita img {
