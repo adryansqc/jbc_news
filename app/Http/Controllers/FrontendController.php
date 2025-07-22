@@ -25,6 +25,7 @@ class FrontendController extends Controller
 
         $breakingNews = Berita::where('breaking_news', true)
             ->where('status', true)
+            ->take(3)
             ->get();
 
         $beritaUtama = Berita::with(['kategori:id,name', 'user'])

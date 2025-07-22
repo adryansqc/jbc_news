@@ -612,10 +612,10 @@
 
                     <footer class="article-footer">
                         <div class="article-author">{{ $berita->user->name }}</div>
-                        <div class="article-views">
+                        {{-- <div class="article-views">
                             <i class="far fa-eye"></i>
                             <span>{{ number_format($berita->view) }}</span>
-                        </div>
+                        </div> --}}
                     </footer>
                     <div class="container mt-3">
                         <div class="col-lg-12">

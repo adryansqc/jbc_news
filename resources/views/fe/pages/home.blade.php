@@ -172,9 +172,9 @@
                                         <div class="d-flex align-items-center">
                                             <small>{{ $berita->user->name }}</small>
                                         </div>
-                                        <div class="d-flex align-items-center">
+                                        {{-- <div class="d-flex align-items-center">
                                             <small class="ml-3"><i class="far fa-eye mr-2"></i>{{ $berita->view }}</small>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 @empty
@@ -210,11 +210,11 @@
                             @php
                                 $currentPage = $lamanBerita->currentPage();
                                 $perPage = $lamanBerita->perPage();
-                                $beritaAtas = $lamanBerita->slice(0, 5); 
-                                $beritaBawah = $lamanBerita->slice(5); 
+                                $beritaAtas = $lamanBerita->slice(0, 5);
+                                $beritaBawah = $lamanBerita->slice(5);
                             @endphp
 
-                            
+
                             @foreach($beritaAtas as $berita)
                             <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
                                 <img class="img-fluid" src="{{ $berita->image ? asset('storage/' . $berita->image) : asset('news') . '/img/news-800x500-1.jpg' }}" style="object-fit: cover; width: 110px; height: 110px;" alt="">
@@ -231,11 +231,11 @@
                             @endforeach
                         </div>
 
-                        
+
                         @include('fe.components.corausel')
 
                         <div class="col-lg-12">
-                            
+
                             @foreach($beritaBawah as $berita)
                             <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
                                 <img class="img-fluid" src="{{ $berita->image ? asset('storage/' . $berita->image) : asset('news') . '/img/news-800x500-1.jpg' }}" style="object-fit: cover; width: 110px; height: 110px;" alt="">
@@ -251,7 +251,7 @@
                             </div>
                             @endforeach
 
-                            
+
                             <div class="d-flex justify-content-center mt-4">
                                 {{ $lamanBerita->links() }}
                             </div>
