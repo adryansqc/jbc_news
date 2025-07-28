@@ -260,6 +260,56 @@ class FrontendController extends Controller
         $kategori = Categorie::all();
         return view('fe.pages.otobiz', compact('otobiz', 'beritaPopuler', 'kategori'));
     }
+    public function regional()
+    {
+        $regional = Berita::with(['kategori' => function ($query) {
+            $query->where('name', 'Regional');
+        }, 'user'])
+            ->whereHas('kategori', function ($query) {
+                $query->where('name', 'Regional');
+            })
+            ->where('status', true)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
+            ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
+            ->orderBy('view', 'desc')
+            ->take(5)
+            ->get();
+
+        $kategori = Categorie::all();
+        return view('fe.pages.regional', compact('regional', 'beritaPopuler', 'kategori'));
+    }
+    public function olahraga()
+    {
+        $olahraga = Berita::with(['kategori' => function ($query) {
+            $query->where('name', 'Olahraga');
+        }, 'user'])
+            ->whereHas('kategori', function ($query) {
+                $query->where('name', 'Olahraga');
+            })
+            ->where('status', true)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        $beritaPopuler = Berita::with(['kategori:id,name', 'user'])
+            ->where('status', true)
+            ->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ])
+            ->orderBy('view', 'desc')
+            ->take(5)
+            ->get();
+
+        $kategori = Categorie::all();
+        return view('fe.pages.olahraga', compact('olahraga', 'beritaPopuler', 'kategori'));
+    }
 
     public function beritaDetail($slug)
     {

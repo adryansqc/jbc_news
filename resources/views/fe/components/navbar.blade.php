@@ -3,7 +3,7 @@
         <a href="{{ route('frontend.index') }}" class="navbar-brand d-block d-lg-none">
             <img src="{{ asset('news') }}/img/logo3.jpg" alt="JamBisnis Logo" class="img-fluid logo-mobile">
         </a>
-        
+
         <!-- Mobile Icons Container -->
         <div class="d-flex d-lg-none mobile-icons-container">
             <button type="button" class="btn mobile-search-toggle" data-toggle="collapse" data-target="#mobileSearchCollapse">
@@ -13,7 +13,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-        
+
         <!-- Mobile Search Bar (separate collapse) -->
         <div class="collapse mobile-search-container-outer" id="mobileSearchCollapse">
             <div class="mobile-search-container-inner">
@@ -27,8 +27,8 @@
                 </form>
             </div>
         </div>
-        
-        <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">            
+
+        <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
             <div class="navbar-nav mr-auto py-0">
                 <a href="{{ route('frontend.index') }}" class="nav-item nav-link small nav-link-modern {{ Route::is('frontend.index') ? 'active' : '' }}">Beranda</a>
                 <a href="{{ route('frontend.bisnisjambi') }}" class="nav-item nav-link small nav-link-modern {{ Route::is('frontend.bisnisjambi') ? 'active' : '' }}">Bisnis Jambi</a>
@@ -39,6 +39,8 @@
                 <a href="{{ route('frontend.internasional') }}" class="nav-item nav-link small nav-link-modern {{ Route::is('frontend.internasional') ? 'active' : '' }}">Internasional</a>
                 <a href="{{ route('frontend.kuliner') }}" class="nav-item nav-link small nav-link-modern {{ Route::is('frontend.kuliner') ? 'active' : '' }}">Kuliner</a>
                 <a href="{{ route('frontend.otobiz') }}" class="nav-item nav-link small nav-link-modern {{ Route::is('frontend.otobiz') ? 'active' : '' }}">Otobiz</a>
+                <a href="{{ route('frontend.regional') }}" class="nav-item nav-link small nav-link-modern {{ Route::is('frontend.regional') ? 'active' : '' }}">Regional</a>
+                <a href="{{ route('frontend.olahraga') }}" class="nav-item nav-link small nav-link-modern {{ Route::is('frontend.olahraga') ? 'active' : '' }}">Olahraga</a>
             </div>
         </div>
     </nav>
@@ -109,7 +111,7 @@
                 border: 1px solid rgba(255, 255, 255, 0.2) !important;
                 background: rgba(255, 255, 255, 0.1);
             }
-            
+
             .modern-toggler:focus {
                 box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
             }
@@ -120,11 +122,11 @@
                 border: 1px solid #6c757d !important;
                 background: transparent;
             }
-            
+
             .modern-toggler:focus {
                 box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25);
             }
-            
+
             .modern-toggler .navbar-toggler-icon {
                 background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
             }
@@ -178,7 +180,7 @@
                 font-weight: 600 !important;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
-            
+
             .navbar-nav {
                 padding-top: 10px;
             }

@@ -16,6 +16,8 @@ Route::get('/nasional', [FrontendController::class, 'nasional'])->name('frontend
 Route::get('/internasional', [FrontendController::class, 'internasional'])->name('frontend.internasional');
 Route::get('/kuliner', [FrontendController::class, 'kuliner'])->name('frontend.kuliner');
 Route::get('/otobiz', [FrontendController::class, 'otobiz'])->name('frontend.otobiz');
+Route::get('/regional', [FrontendController::class, 'regional'])->name('frontend.regional');
+Route::get('/olahraga', [FrontendController::class, 'olahraga'])->name('frontend.olahraga');
 Route::get('/berita/{slug}', [FrontendController::class, 'beritaDetail'])->name('frontend.beritaDetail');
 Route::get('/search', [FrontendController::class, 'search'])->name('frontend.search');
 Route::get('/about-us', [FrontendController::class, 'aboutus'])->name('frontend.aboutus');
