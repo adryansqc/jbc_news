@@ -417,6 +417,38 @@
             transform: translateY(-1px);
         }
 
+        .article-pagination {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .article-pagination a {
+            display: inline-block;
+            padding: 4px 8px;
+            margin: 0 2px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            color: #007bff;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .article-pagination a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .article-pagination a.active {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        .article-pagination .separator {
+            margin: 0 4px;
+            color: #888;
+        }
+
         /* ===== MOBILE RESPONSIVE ===== */
         @media (max-width: 768px) {
             .container {
@@ -604,10 +636,26 @@
                                 <p class="credit-name">{{ $berita->editor->nama }}</p>
                             </div>
                         </div>
-
                         <div class="article-content content-berita">
-                            {!! $berita->content !!}
+                            {!! $currentContent !!}
                         </div>
+
+                        @if(count($chunks) > 1)
+                            <nav class="article-pagination">
+                                @foreach(range(1, count($chunks)) as $i)
+                                    <a href="?page={{ $i }}" class="{{ $i == $currentPage ? 'active' : '' }}">
+                                        {{ $i }}
+                                    </a>
+                                    @if(!$loop->last)
+                                        <span class="separator">|</span>
+                                    @endif
+                                @endforeach
+                            </nav>
+                        @endif
+
+                        {{-- <div class="article-content content-berita">
+                            {!! $berita->content !!}
+                        </div> --}}
                     </div>
 
                     <footer class="article-footer">

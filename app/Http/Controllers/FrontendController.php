@@ -347,9 +347,29 @@ class FrontendController extends Controller
             ->take(5)
             ->get();
 
+
         $kategori = Categorie::all();
 
-        return view('fe.pages.beritaDetail', compact('berita', 'beritaTerkait', 'beritaPopuler', 'kategori', 'beritaTerbaru'));
+        $content = strip_tags($berita->content, '<br><p><a><img><span><strong><em><ul><ol><li>');
+        $content = str_replace(["\r\n", "\r"], "\n", $content);
+        $lines = preg_split('/\n+|<br\s*\/?>/', $content);
+
+        $perPage = 6;
+        $page = max(1, (int) request('page', 1));
+        $chunks = array_chunk(array_filter($lines), $perPage);
+        $page = min($page, count($chunks) ?: 1);
+        $currentContent = implode('<br>', $chunks[$page - 1] ?? []);
+
+        return view('fe.pages.beritaDetail', [
+            'berita'         => $berita,
+            'beritaTerkait'  => $beritaTerkait,
+            'beritaPopuler'  => $beritaPopuler,
+            'kategori'       => $kategori,
+            'beritaTerbaru'  => $beritaTerbaru,
+            'chunks'         => $chunks,
+            'currentContent' => $currentContent,
+            'currentPage'    => $page,
+        ]);
     }
 
     public function search(Request $request)
