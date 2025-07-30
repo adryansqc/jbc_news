@@ -348,15 +348,25 @@ class FrontendController extends Controller
         $kategori = Categorie::all();
 
         // $content = $berita->content;
+        // Strip HTML tags kecuali elemen yang diperbolehkan
         $content = strip_tags($berita->content, '<br><p><a><img><span><strong><em><ul><ol><li>');
         $content = str_replace(["\r\n", "\r"], "\n", $content);
-        $lines = preg_split('/\n+|<br\s*\/?>/', $content);
+
+        // Pisahkan konten berdasarkan paragraf atau tag HTML lainnya
+        // $lines = preg_split('/(<p[^>]*>.*?<\/p>)/is', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
+        // $lines = array_filter($lines); // Hapus elemen kosong
+        $lines = preg_split('/(<p[^>]*>.*?<\/p>|<span[^>]*>.*?<\/span>|<a[^>]*>.*?<\/a>|<ul[^>]*>.*?<\/ul>|<ol[^>]*>.*?<\/ol>|<li[^>]*>.*?<\/li>)/is', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
+        $lines = array_filter($lines);
 
         $perPage = 6;
         $page = max(1, (int) request('page', 1));
-        $chunks = array_chunk(array_filter($lines), $perPage);
-        $page = min($page, count($chunks) ?: 1);
-        $currentContent = implode('<br>', $chunks[$page - 1] ?? []);
+        $chunks = array_chunk($lines, $perPage);
+        $page = min($page, count($chunks) ?: 1); // Pastikan halaman tidak melebihi jumlah halaman
+
+        $currentContent = implode('', $chunks[$page - 1] ?? []); // Gabungkan kembali elemen pada halaman yang dipilih
+
+        // Debugging untuk memeriksa halaman dan konten
+        // dd($page, $chunks, $currentContent);
 
         return view('fe.pages.beritaDetail', [
             'berita'         => $berita,
