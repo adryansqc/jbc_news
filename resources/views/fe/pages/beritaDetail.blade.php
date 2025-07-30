@@ -640,18 +640,21 @@
                             {!! $currentContent !!}
                         </div>
 
-                        @if(count($chunks) > 1)
-                            <nav class="article-pagination">
-                                @foreach(range(1, count($chunks)) as $i)
-                                    <a href="?page={{ $i }}" class="{{ $i == $currentPage ? 'active' : '' }}">
-                                        {{ $i }}
-                                    </a>
-                                    @if(!$loop->last)
-                                        <span class="separator">|</span>
-                                    @endif
-                                @endforeach
-                            </nav>
-                        @endif
+                        <div class="article-pagination">
+                            @if($totalPages > 1)
+                                <nav class="article-pagination">
+                                    @for($i = 1; $i <= $totalPages; $i++)
+                                        <a href="?page={{ $i }}" class="{{ $i == $currentPage ? 'active' : '' }}">
+                                            {{ $i }}
+                                        </a>
+                                        @if($i < $totalPages)
+                                            <span class="separator">|</span>
+                                        @endif
+                                    @endfor
+                                </nav>
+                            @endif
+                        </div>
+
 
                         {{-- <div class="article-content content-berita">
                             {!! $berita->content !!}

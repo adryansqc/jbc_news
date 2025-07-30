@@ -324,10 +324,8 @@ class FrontendController extends Controller
             ->take(5)
             ->get();
 
-        // Increment view count
         $berita->increment('view');
 
-        // Get related news from same category
         $beritaTerkait = Berita::with(['kategori', 'user'])
             ->where('status', true)
             ->where('beritas.id', '!=', $berita->id)
@@ -347,18 +345,54 @@ class FrontendController extends Controller
             ->take(5)
             ->get();
 
-
         $kategori = Categorie::all();
 
-        $content = strip_tags($berita->content, '<br><p><a><img><span><strong><em><ul><ol><li>');
-        $content = str_replace(["\r\n", "\r"], "\n", $content);
-        $lines = preg_split('/\n+|<br\s*\/?>/', $content);
+        $wordsPerPage = 300;
+        $plainContent = strip_tags($berita->content);
+        $words = preg_split('/\s+/', trim($plainContent));
+        $totalWords = count($words);
 
-        $perPage = 6;
+        $totalPages = ceil($totalWords / $wordsPerPage);
+
         $page = max(1, (int) request('page', 1));
-        $chunks = array_chunk(array_filter($lines), $perPage);
-        $page = min($page, count($chunks) ?: 1);
-        $currentContent = implode('<br>', $chunks[$page - 1] ?? []);
+        $page = min($page, $totalPages);
+        $startWord = ($page - 1) * $wordsPerPage;
+        $currentWords = array_slice($words, $startWord, $wordsPerPage);
+        $currentPlainContent = implode(' ', $currentWords);
+
+        if ($page > 1) {
+            $searchWords = array_slice($words, max(0, $startWord - 5), 10);
+            $searchText = implode(' ', $searchWords);
+
+            $plainForSearch = strip_tags($berita->content);
+            $searchPos = strpos($plainForSearch, trim($currentWords[0]));
+
+            if ($searchPos !== false) {
+                $htmlContent = $berita->content;
+                $currentPos = 0;
+                $plainPos = 0;
+
+                while ($plainPos < $searchPos && $currentPos < strlen($htmlContent)) {
+                    if ($htmlContent[$currentPos] === '<') {
+                        while ($currentPos < strlen($htmlContent) && $htmlContent[$currentPos] !== '>') {
+                            $currentPos++;
+                        }
+                        $currentPos++;
+                    } else {
+                        $plainPos++;
+                        $currentPos++;
+                    }
+                }
+
+                $remainingHtml = substr($htmlContent, $currentPos);
+
+                $currentContent = $this->extractContentByWords($remainingHtml, $wordsPerPage);
+            } else {
+                $currentContent = $currentPlainContent;
+            }
+        } else {
+            $currentContent = $this->extractContentByWords($berita->content, $wordsPerPage);
+        }
 
         return view('fe.pages.beritaDetail', [
             'berita'         => $berita,
@@ -366,10 +400,89 @@ class FrontendController extends Controller
             'beritaPopuler'  => $beritaPopuler,
             'kategori'       => $kategori,
             'beritaTerbaru'  => $beritaTerbaru,
-            'chunks'         => $chunks,
+            'totalPages'     => $totalPages,
             'currentContent' => $currentContent,
             'currentPage'    => $page,
         ]);
+    }
+
+    /**
+     * Extract content by word count while preserving HTML structure
+     */
+    private function extractContentByWords($htmlContent, $wordLimit)
+    {
+        libxml_use_internal_errors(true);
+
+        $dom = new \DOMDocument();
+        $wrappedContent = '<div>' . $htmlContent . '</div>';
+
+        try {
+            $dom->loadHTML('<?xml encoding="utf-8" ?>' . $wrappedContent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        } catch (\Exception $e) {
+            return strip_tags($htmlContent);
+        }
+
+        $wordCount = 0;
+        $result = '';
+
+        $this->traverseNodes($dom->documentElement, $wordCount, $wordLimit, $result);
+
+        libxml_clear_errors();
+
+        return $result;
+    }
+
+    /**
+     * Traverse DOM nodes and extract content up to word limit
+     */
+    private function traverseNodes($node, &$wordCount, $wordLimit, &$result)
+    {
+        if ($wordCount >= $wordLimit) {
+            return false;
+        }
+
+        if ($node->nodeType === XML_TEXT_NODE) {
+            $text = $node->textContent;
+            $words = preg_split('/\s+/', trim($text));
+            $words = array_filter($words);
+
+            if (!empty($words)) {
+                $remainingWords = $wordLimit - $wordCount;
+                if (count($words) <= $remainingWords) {
+                    $result .= $text;
+                    $wordCount += count($words);
+                } else {
+                    $neededWords = array_slice($words, 0, $remainingWords);
+                    $result .= implode(' ', $neededWords);
+                    $wordCount = $wordLimit;
+                    return false;
+                }
+            }
+        } else {
+            // Handle element nodes
+            if ($node->nodeType === XML_ELEMENT_NODE) {
+                $tagName = $node->nodeName;
+                $attributes = '';
+
+                if ($node->hasAttributes()) {
+                    foreach ($node->attributes as $attr) {
+                        $attributes .= ' ' . $attr->nodeName . '="' . htmlspecialchars($attr->nodeValue) . '"';
+                    }
+                }
+
+                $result .= '<' . $tagName . $attributes . '>';
+
+                foreach ($node->childNodes as $child) {
+                    if (!$this->traverseNodes($child, $wordCount, $wordLimit, $result)) {
+                        break;
+                    }
+                }
+
+                $result .= '</' . $tagName . '>';
+            }
+        }
+
+        return true;
     }
 
     public function search(Request $request)
