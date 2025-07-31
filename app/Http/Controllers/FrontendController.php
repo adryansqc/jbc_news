@@ -358,7 +358,7 @@ class FrontendController extends Controller
         $lines = preg_split('/(<p[^>]*>.*?<\/p>|<span[^>]*>.*?<\/span>|<a[^>]*>.*?<\/a>|<ul[^>]*>.*?<\/ul>|<ol[^>]*>.*?<\/ol>|<li[^>]*>.*?<\/li>)/is', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
         $lines = array_filter($lines);
 
-        $perPage = 6;
+        $perPage = 10;
         $page = max(1, (int) request('page', 1));
         $chunks = array_chunk($lines, $perPage);
         $page = min($page, count($chunks) ?: 1); // Pastikan halaman tidak melebihi jumlah halaman
