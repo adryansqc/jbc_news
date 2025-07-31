@@ -37,13 +37,13 @@
                 <a href="{{ route('frontend.properti') }}" class="nav-item nav-link small nav-link-modern {{ Route::is('frontend.properti') ? 'active' : '' }}">Properti</a>
                 <a href="{{ route('frontend.nasional') }}" class="nav-item nav-link small nav-link-modern {{ Route::is('frontend.nasional') ? 'active' : '' }}">Nasional</a>
                 <a href="{{ route('frontend.internasional') }}" class="nav-item nav-link small nav-link-modern {{ Route::is('frontend.internasional') ? 'active' : '' }}">Internasional</a>
-                <a href="{{ route('frontend.kuliner') }}" class="nav-item nav-link small nav-link-modern {{ Route::is('frontend.kuliner') ? 'active' : '' }}">Kuliner</a>
                 <a href="{{ route('frontend.otobiz') }}" class="nav-item nav-link small nav-link-modern {{ Route::is('frontend.otobiz') ? 'active' : '' }}">Otobiz</a>
+                <a href="{{ route('frontend.regional') }}" class="dropdown-item small nav-link-modern {{ Route::is('frontend.regional') ? 'active' : '' }}">Regional</a>
                 {{-- Dropdown "Lainnya" --}}
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle small nav-link-modern {{ Route::is('frontend.regional') || Route::is('frontend.olahraga') ? 'active' : '' }}" data-toggle="dropdown">Lainnya</a>
                     <div class="dropdown-menu rounded-0 m-0">
-                        <a href="{{ route('frontend.regional') }}" class="dropdown-item small nav-link-modern {{ Route::is('frontend.regional') ? 'active' : '' }}">Regional</a>
+                        <a href="{{ route('frontend.kuliner') }}" class="nav-item nav-link small nav-link-modern {{ Route::is('frontend.kuliner') ? 'active' : '' }}">Kuliner</a>
                         <a href="{{ route('frontend.olahraga') }}" class="dropdown-item small nav-link-modern {{ Route::is('frontend.olahraga') ? 'active' : '' }}">Olahraga</a>
                     </div>
                 </div>
